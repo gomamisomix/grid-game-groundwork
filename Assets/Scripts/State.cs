@@ -33,6 +33,9 @@ public class State
         foreach (MoverToTrack m in moversToTrack) {
 		    m.positions.Add(Vector3Int.RoundToInt(m.mover.transform.position));
 		    m.rotations.Add(Vector3Int.RoundToInt(m.mover.transform.eulerAngles));
+
+            if(m.mover.transform.name == "Player") { Debug.Log(m.mover.transform.eulerAngles + " / " + m.rotations[undoIndex] ); }
+
         }
     }
 
@@ -40,6 +43,7 @@ public class State
         foreach (MoverToTrack m in moversToTrack) {
             m.positions.RemoveAt(m.positions.Count - 1);
             m.mover.transform.position = m.positions[m.positions.Count - 1];
+            m.rotations.RemoveAt(m.rotations.Count - 1);
             m.mover.transform.eulerAngles = m.rotations[m.rotations.Count - 1];
         }
 	}
